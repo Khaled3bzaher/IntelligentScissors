@@ -21,7 +21,7 @@ namespace IntelligentScissors
         int mouseX = 0;
         int mouseY = 0;
         Dictionary<Vector2D, List<double>> wightedGraph;
-        List<Point> points = new List<Point>();
+        List<Vector2D> points = new List<Vector2D>();
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
@@ -98,6 +98,7 @@ namespace IntelligentScissors
             {
                 
                 points.RemoveAt(points.Count - 1);
+                isClicked--;
                 return;
 
             }
@@ -114,8 +115,10 @@ namespace IntelligentScissors
            
             
             isClicked++;
-            
-            Point point = new Point(e.X, e.Y);
+
+            Vector2D point = new Vector2D();
+            point.X = e.X;
+            point.Y = e.Y;
             points.Add(point);
 
             mouseX = e.X;
@@ -138,10 +141,63 @@ namespace IntelligentScissors
                 {
                     Refresh();
                     for (int i = 0; i < points.Count - 1; i++)
-                        g.DrawLine(p, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
-                    g.DrawLine(p, points[points.Count -1].X, points[points.Count - 1].Y, e.X, e.Y);
+                        g.DrawLine(p, (float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y);
+                    g.DrawLine(p, (float)points[points.Count -1].X, (float)points[points.Count - 1].Y, e.X, e.Y);
+                    // calculate shortest path from points[points.Count-1] to mouse position using Dijkstra's algorithm
+                    Vector2D point = new Vector2D();
+                    point.X = e.X;
+                    point.Y = e.Y;
+                    Dijkstra(points[points.Count - 1], point);
 
+                }
+            }
+        }
 
+        private void Dijkstra(Vector2D src, Vector2D dist)
+        {
+            // initialize the distance array
+            Dictionary<Vector2D, double> distance = new Dictionary<Vector2D, double>();
+            Dictionary<Vector2D, Vector2D> previous = new Dictionary<Vector2D, Vector2D>();
+            foreach (Vector2D vertex in wightedGraph.Keys)
+            {
+                distance[vertex] = double.PositiveInfinity;
+                Vector2D vector2D = new Vector2D();
+                vector2D.X = -1;
+                vector2D.Y = -1;
+                previous[vertex] = vector2D;
+                
+
+            }
+            distance[src] = 0;
+            List<Vector2D> unvisited = new List<Vector2D>(wightedGraph.Keys);
+
+            while (unvisited.Count > 0)
+            {
+                // find the vertex with the smallest distance
+                Vector2D u = new Vector2D();
+                u.X = -1;
+                u.Y = -1;
+                foreach (Vector2D possibleU in unvisited)
+                {
+                    if (((u.X == -1) && (u.Y == -1))|| distance[possibleU] < distance[u])
+                    {
+                        u = possibleU;
+                    }
+
+                }
+
+                // remove u from the unvisited list
+                unvisited.Remove(u);
+
+                // update the distance array
+                foreach (Vector2D v in wightedGraph[u])
+                {
+                    double alt = distance[u] + wightedGraph[u][v];
+                    if (alt < distance[v])
+                    {
+                        distance[v] = alt;
+                        previous[v] = u;
+                    }
                 }
             }
         }
