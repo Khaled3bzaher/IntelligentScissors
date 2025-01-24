@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Text;
 using System.Windows.Forms;
+using ConsoleApp2;
 
 namespace IntelligentScissors
 {
@@ -16,13 +19,21 @@ namespace IntelligentScissors
         }
 
         RGBPixel[,] ImageMatrix;
-        Boolean isLoaded = false;
-        int isClicked = 0;
-        int mouseX = 0;
-        int mouseY = 0;
-        Dictionary<Vector2D, List<double>> wightedGraph;
-        List<Vector2D> points = new List<Vector2D>();
 
+        Boolean isLoaded = false; // Cannot Do Any Thing without Loading Picture
+        Boolean isFinished = false; // To Draw Closed Path
+        int isClicked = 0; // To Check There al least 2 points
+
+
+        // Hold All Graph
+        Dictionary<int, List<Node>> wightedGraph;
+        // Hold All Mouse Clicked
+        List<Tuple<int, int>> points = new List<Tuple<int, int>>();
+        // Hold All Pathes Drawed
+        List<List<Tuple<int, int>>> pathes = new List<List<Tuple<int, int>>>();
+        int width;
+        int height;
+        // Graph & Load Picture
         private void btnOpen_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog1 = new OpenFileDialog();
@@ -37,98 +48,91 @@ namespace IntelligentScissors
             txtWidth.Text = ImageOperations.GetWidth(ImageMatrix).ToString();
             txtHeight.Text = ImageOperations.GetHeight(ImageMatrix).ToString();
 
+            width = Convert.ToInt32(txtWidth.Text);
+            height = Convert.ToInt32(txtHeight.Text);
+
             // Start of the code
             //Graph
-            wightedGraph = new Dictionary<Vector2D, List<double>>();
-            for (int i = 0; i < Convert.ToInt32(txtWidth.Text); i++)
+            //j=x-axis & no of columns  ---- i=y-axis & no of rows 
+            Stopwatch graphTime = new Stopwatch();
+            wightedGraph = new Dictionary<int, List<Node>>();
+            graphTime.Start();
+            for (int i = 0; i < height; i++)
             {
-                for (int j = 0; j < Convert.ToInt32(txtHeight.Text); j++)
+                for (int j = 0; j < width; j++)
                 {
-
-                    Vector2D vertex = new Vector2D();
-                    vertex.X = i;
-                    vertex.Y = j;
-                    wightedGraph[vertex] = new List<double>();
-                    if (j != Convert.ToInt32(txtWidth.Text) - 1)
+                    int index = i * width + j; // Pixel Index
+                    wightedGraph[index] = new List<Node>(); // Hold 4 Connectivity
+                 
+                    Vector2D RightDown = ImageOperations.CalculatePixelEnergies(j, i, ImageMatrix);
+                    if (j != width - 1) // Can Calc Right ?
                     {
-                        double wieghtRight = ImageOperations.CalculatePixelEnergies(i, j, ImageMatrix).X;
-                        wightedGraph[vertex].Add(wieghtRight);
+                        wightedGraph[index].Add(new Node(i, j + 1, double.IsInfinity(1 / RightDown.X) ? 1e16 : 1 / RightDown.X, null));
                     }
-                    if (i != Convert.ToInt32(txtHeight.Text) - 1)
+                    if (i != height - 1) // Can Calc Down ?
                     {
-                        double wieghtBottom = ImageOperations.CalculatePixelEnergies(i, j, ImageMatrix).Y;
-                        wightedGraph[vertex].Add(wieghtBottom);
+                        wightedGraph[index].Add(new Node(i + 1, j, double.IsInfinity(1 / RightDown.Y) ? 1e16 : 1 / RightDown.Y, null));
                     }
-                    if (j != 0)
+                    if (i != 0) // Can Calc Up ?
                     {
-                        double wieghtLeft = ImageOperations.CalculatePixelEnergies(i, j - 1, ImageMatrix).X;
-                        wightedGraph[vertex].Add(wieghtLeft);
-
+                        double weightUp = 1 / ImageOperations.CalculatePixelEnergies(j, i - 1, ImageMatrix).Y;
+                        wightedGraph[index].Add(new Node(i - 1, j, double.IsInfinity(weightUp) ? 1e16 : weightUp, null));
                     }
-                    if (i != 0)
+                    if (j != 0) // Can Calc Left ?
                     {
-                        double wieghtUp = ImageOperations.CalculatePixelEnergies(i - 1, j, ImageMatrix).Y;
-                        wightedGraph[vertex].Add(wieghtUp);
-
-                    }
-
-
-
+                        double weightLeft = 1 / ImageOperations.CalculatePixelEnergies(j - 1, i, ImageMatrix).X;
+                        wightedGraph[index].Add(new Node(i, j - 1, double.IsInfinity(weightLeft) ? 1e16 : weightLeft, null));
+                    }  
                 }
             }
-
+            //Calculate Time
+            graphTime.Stop();
+            TimeSpan GT = graphTime.Elapsed;
+            Console.WriteLine("Graph Created in Time {0:00}:{1:00}:{2:00}.{3}",
+                      GT.Hours, GT.Minutes, GT.Seconds, GT.Milliseconds);
+            oneGenerate = 0; // To Generate One Sample File
         }
-        //private void btnGaussSmooth_Click(object sender, EventArgs e)
-        //{
-        //    double sigma = double.Parse(txtGaussSigma.Text);
-        //    int maskSize = (int)nudMaskSize.Value ;
-        //    ImageMatrix = ImageOperations.GaussianFilter1D(ImageMatrix, maskSize, sigma);
-        //    ImageOperations.DisplayImage(ImageMatrix, pictureBox2);
-        //}
-
-
-
 
         private void pictureBox1_MouseClick(object sender, MouseEventArgs e)
         {
-            if (!isLoaded)
-                return;
-            
-            if(e.Button == MouseButtons.Right)
-            {
-                
-                points.RemoveAt(points.Count - 1);
-                isClicked--;
+            if (!isLoaded || isFinished)
                 return;
 
-            }
-            Vector2D vector2 = new Vector2D();
-            vector2.X = e.X;
-            vector2.Y = e.Y;
-
-            textBox3.Text = wightedGraph[vector2][0].ToString();
-            textBox4.Text = wightedGraph[vector2][1].ToString();
-            textBox5.Text = wightedGraph[vector2][2].ToString();
-            textBox6.Text = wightedGraph[vector2][3].ToString();
-            
-
-           
-            
             isClicked++;
 
-            Vector2D point = new Vector2D();
-            point.X = e.X;
-            point.Y = e.Y;
-            points.Add(point);
+            Console.WriteLine("X: " + e.X + " Y: " + e.Y);
 
-            mouseX = e.X;
-            mouseY = e.Y;
+            // Remove Last Anchor
+            if (e.Button == MouseButtons.Right && points.Count != 0)
+            {
+                isClicked--;
+                if(points.Count - 1 != 0) { 
+                    points.RemoveAt(points.Count - 1);
+                    pathes.RemoveAt(pathes.Count - 1);
+                }
+            }
+            else if (isClicked >= 1) // Draw Dijkstra between 2 Points
+            {
+                Tuple<int, int> click = new Tuple<int, int>(e.Y, e.X);
+                //item 1 in dist Y item 2 in dists 
+                points.Add(click);
+                if (isClicked > 1) {
+                    Stopwatch shortPathTime = new Stopwatch();
+                    shortPathTime.Start();
+                    var lastPath = Dijkstra(points[points.Count - 2], points[points.Count - 1]);
+                    shortPathTime.Stop();
+                    TimeSpan GT = shortPathTime.Elapsed;
+                    Console.WriteLine("Path construction took: {0:00}:{1:00}:{2:00}.{3}",
+                    GT.Hours, GT.Minutes, GT.Seconds, GT.Milliseconds);
+                    pathes.Add(lastPath);
 
-
+                }
+            }
         }
+
         private void pictureBox1_MouseMove(object sender, MouseEventArgs e)
         {
-            if (!isLoaded)
+            if (!isLoaded || isFinished)
                 return;
 
             textBox1.Text = e.X.ToString();
@@ -140,76 +144,144 @@ namespace IntelligentScissors
                 using (Graphics g = pictureBox1.CreateGraphics())
                 {
                     Refresh();
-                    for (int i = 0; i < points.Count - 1; i++)
-                        g.DrawLine(p, (float)points[i].X, (float)points[i].Y, (float)points[i + 1].X, (float)points[i + 1].Y);
-                    g.DrawLine(p, (float)points[points.Count -1].X, (float)points[points.Count - 1].Y, e.X, e.Y);
-                    // calculate shortest path from points[points.Count-1] to mouse position using Dijkstra's algorithm
-                    Vector2D point = new Vector2D();
-                    point.X = e.X;
-                    point.Y = e.Y;
-                    Dijkstra(points[points.Count - 1], point);
-
-                }
-            }
-        }
-
-        private void Dijkstra(Vector2D src, Vector2D dist)
-        {
-            // initialize the distance array
-            Dictionary<Vector2D, double> distance = new Dictionary<Vector2D, double>();
-            Dictionary<Vector2D, Vector2D> previous = new Dictionary<Vector2D, Vector2D>();
-            foreach (Vector2D vertex in wightedGraph.Keys)
-            {
-                distance[vertex] = double.PositiveInfinity;
-                Vector2D vector2D = new Vector2D();
-                vector2D.X = -1;
-                vector2D.Y = -1;
-                previous[vertex] = vector2D;
-                
-
-            }
-            distance[src] = 0;
-            List<Vector2D> unvisited = new List<Vector2D>(wightedGraph.Keys);
-
-            while (unvisited.Count > 0)
-            {
-                // find the vertex with the smallest distance
-                Vector2D u = new Vector2D();
-                u.X = -1;
-                u.Y = -1;
-                foreach (Vector2D possibleU in unvisited)
-                {
-                    if (((u.X == -1) && (u.Y == -1))|| distance[possibleU] < distance[u])
+                    //Anchors
+                    foreach (var node in points)
+                        g.DrawEllipse(new Pen(Color.Red, 4), node.Item2, node.Item1, 1, 1);
+                    //Pathes
+                    foreach (var currentPath in pathes)
                     {
-                        u = possibleU;
+                        foreach (var node in currentPath)
+                        {
+                            g.DrawEllipse(p, node.Item2, node.Item1, 1, 1);
+                        }
                     }
-
-                }
-
-                // remove u from the unvisited list
-                unvisited.Remove(u);
-
-                // update the distance array
-                foreach (Vector2D v in wightedGraph[u])
-                {
-                    double alt = distance[u] + wightedGraph[u][v];
-                    if (alt < distance[v])
+                    //Dijkstra and Current Mouse Position
+                    if (points.Count > 0)
                     {
-                        distance[v] = alt;
-                        previous[v] = u;
+                        List<Tuple<int, int>> ayAsm = Dijkstra(points[points.Count - 1], new Tuple<int, int>(e.Y, e.X));
+                        foreach (var node in ayAsm)
+                        {
+                            g.DrawEllipse(p, node.Item2, node.Item1, 1, 1);
+                        }
                     }
                 }
             }
         }
 
-        private void pictureBox1_Paint(object sender, PaintEventArgs e)
+        public List<Tuple<int, int>> Dijkstra(Tuple<int, int> src, Tuple<int, int> dist)
         {
-            if (!isLoaded)
+            //Console.WriteLine("Src" + src + "Dist" + dist);
+            // Item 1 -> Y    Item 2  -> X              IN SRC & DIST
+
+            int Source = src.Item2 + src.Item1 * width;
+            int Destination = dist.Item2 + dist.Item1 * width;
+
+            priorityQueue prQueue = new priorityQueue();
+
+            Dictionary<int, double> distance = new Dictionary<int, double>();
+            Dictionary<int, int> parent = new Dictionary<int, int>();
+            bool[] visted = new bool[width * height];
+
+            List<Tuple<int, int>> path = new List<Tuple<int, int>>();
+
+            prQueue.Add(new Node(src.Item1, src.Item2, 0, null), 0);
+            distance[Source] = 0;
+            parent[Source] = -1;
+
+            while (prQueue.count != 0)
+            {
+                Node node = prQueue.Dequeue();
+                int vertex = node.y + node.x * width;
+                visted[vertex] = true;
+
+                if (vertex == Destination)
+                {
+                    int temp = vertex;
+                    while (parent[temp] != -1)
+                    {
+                        path.Add(new Tuple<int, int>(temp / width, temp % width));
+                        temp = parent[temp];
+                    }
+                    path.Add(new Tuple<int, int>(temp / width, temp % width));
+                    break;
+                }
+                //Node.X == Y && Node.Y == X
+                foreach (var neighboor in wightedGraph[vertex])
+                {
+                    int Neigh = neighboor.y + neighboor.x * width;
+                    if (!visted[Neigh])
+                    {
+                        if (!distance.ContainsKey(Neigh))
+                        {
+                            distance.Add(Neigh, distance[vertex] + neighboor.weight);
+                            parent[Neigh] = vertex;
+                            prQueue.Add(neighboor, distance[Neigh]);
+                        }
+                        if (distance[vertex] + neighboor.weight < distance[Neigh])
+                        {
+                            distance[Neigh] = distance[vertex] + neighboor.weight;
+                            parent[Neigh] = vertex;
+                            prQueue.Add(neighboor, distance[Neigh]);
+                        }
+                    }
+                }
+            }
+            return path;
+        }
+        //Close The Path
+        private void pictureBox1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                isFinished = true;
+                Pen p = new Pen(Color.Blue, 1.0f);
+                using (Graphics g = pictureBox1.CreateGraphics())
+                {
+                    Refresh();
+                    //To Draw Normal Line
+                    List<Tuple<int, int>> ayAsm = Dijkstra(points[points.Count - 1], points[0]);
+                    pathes.Add(ayAsm);
+                    // All Pathes Drawing
+                    int pixelCount = 0;
+                    foreach (var path in pathes)
+                        foreach (var node in path)
+                        {
+                            g.DrawEllipse(p, node.Item2, node.Item1, 1, 1);
+                            pixelCount++;
+                        }
+                    Console.WriteLine("Full Path Pixels Count : " + pixelCount);
+                    // To Draw Last Path Using Dijkstra
+                    //g.DrawLine(p, points[points.Count - 1].Item2, points[points.Count - 1].Item1, points[0].Item2, points[0].Item1);
+                }
+            }
+        }
+
+        //Sample Output
+        int oneGenerate = 0;
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!isLoaded || oneGenerate != 0)
                 return;
-
-        }
-
+            oneGenerate++;
 
 
+            using (StreamWriter streamWriter = File.CreateText(@"G://FCIS//Sixth Semester//Algorithms//Project//13-5//IntelligentScissors//sampleGraphOutPut.txt"))
+            {
+                streamWriter.WriteLine("The constructed graph");
+                streamWriter.WriteLine("");
+                foreach (var pixel in wightedGraph.Keys) //0 1 2 3 4 5 6 7
+                {
+                    streamWriter.WriteLine(" The  index node" + pixel.ToString());
+                    streamWriter.WriteLine("Edges");
+                    foreach (var node in wightedGraph[pixel])
+                    {
+                        streamWriter.WriteLine("edge from   " + pixel.ToString() + "  To  " + (((node.x) * width) + (node.y)).ToString() + "  With Weights  " + node.weight.ToString());
+                    }
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("");
+                    streamWriter.WriteLine("");
+                }
+            }
+        }   
     }
 }

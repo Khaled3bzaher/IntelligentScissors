@@ -126,7 +126,7 @@ namespace IntelligentScissors
         /// <summary>
         /// Calculate edge energy between
         ///     1. the given pixel and its right one (X)
-        ///     2. the given pixel and its bottom one (Y)
+        ///     2. the given pixel and its bottom one (Y)  
         /// </summary>
         /// <param name="x">pixel x-coordinate</param>
         /// <param name="y">pixel y-coordinate</param>
@@ -279,7 +279,6 @@ namespace IntelligentScissors
 
             return Filtered;
         }
-
 
         #region Private Functions
         /// <summary>

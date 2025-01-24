@@ -1,0 +1,59 @@
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\bin\Debug\IntelligentScissors.exe
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\bin\Debug\IntelligentScissors.pdb
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\obj\Debug\IntelligentScissors.Properties.Resources.resources
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.GenerateResource.Cache
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\obj\Debug\IntelligentScissors.exe
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\obj\Debug\IntelligentScissors.pdb
+C:\Users\Ah\Dropbox\[ALG'15] Materials\---- Staff only ----\Projects\Intelligent Scissors\[TEMPLATE] IntelligentScissors\IntelligentScissors\obj\Debug\IntelligentScissors.MainForm.resources
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\IntelligentScissors.exe
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\IntelligentScissors.pdb
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.AssemblyReference.cache
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.MainForm.resources
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.Properties.Resources.resources
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.GenerateResource.cache
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.CoreCompileInputs.cache
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.exe
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.pdb
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\IntelligentScissors.exe
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\IntelligentScissors.pdb
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.AssemblyReference.cache
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.MainForm.resources
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.Properties.Resources.resources
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.GenerateResource.cache
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.CoreCompileInputs.cache
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.exe
+C:\Users\hp\Desktop\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\obj\Debug\IntelligentScissors.pdb
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\ICSharpCode.SharpZipLib.dll
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\Lucene.Net.dll
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\Lucene.Net.pdb
+D:\FCIS\Third  Grade FCIS\Term 2\Analysis & Design of Algorithms\Project\[1] Intelligent Scissors\[TEMPLATE] IntelligentScissors 2\IntelligentScissors\bin\Debug\Lucene.Net.xml
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\IntelligentScissors.exe
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\IntelligentScissors.pdb
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\ICSharpCode.SharpZipLib.dll
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\Lucene.Net.dll
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\Lucene.Net.pdb
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\Lucene.Net.xml
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.AssemblyReference.cache
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.MainForm.resources
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.Properties.Resources.resources
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.GenerateResource.cache
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.CoreCompileInputs.cache
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.CopyComplete
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.exe
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\obj\Debug\IntelligentScissors.pdb
+G:\FCIS\Sixth Semester\Algorithms\Project\13-5\IntelligentScissors\bin\Debug\IntelligentScissors.exe.config
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\IntelligentScissors.exe.config
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\IntelligentScissors.exe
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\IntelligentScissors.pdb
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\ICSharpCode.SharpZipLib.dll
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\Lucene.Net.dll
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\Lucene.Net.pdb
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\bin\Debug\Lucene.Net.xml
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.AssemblyReference.cache
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.MainForm.resources
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.Properties.Resources.resources
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.GenerateResource.cache
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.csproj.CoreCompileInputs.cache
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\Intellig.E1147A55.Up2Date
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.exe
+F:\FCIS\Sixth Semester\Algorithms\Algo Project Final To Deliver\Intelligent Scissors T195 Project\IntelligentScissors\obj\Debug\IntelligentScissors.pdb
